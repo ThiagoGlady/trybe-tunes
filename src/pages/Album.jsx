@@ -26,7 +26,7 @@ class Album extends Component {
 
   render() {
     const { albumData } = this.state;
-
+    console.log(albumData);
     return (
       <div data-testid="page-album">
         <Header />
