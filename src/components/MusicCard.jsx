@@ -14,6 +14,27 @@ class MusicCard extends Component {
     };
   }
 
+  componentDidMount() {
+    const {
+      favoriteTracks,
+      track,
+    } = this.props;
+
+    console.log(favoriteTracks);
+
+    const chosenTrack = favoriteTracks.filter((favoriteTrack) => (
+      favoriteTrack.trackId === track.trackId
+    ));
+
+    console.log(chosenTrack);
+
+    if (chosenTrack[0]) {
+      this.setState({
+        isFavorite: true,
+      });
+    }
+  }
+
   async setFavoriteTrack() {
     const { track } = this.props;
 
@@ -56,7 +77,7 @@ class MusicCard extends Component {
                     <input
                       type="checkbox"
                       checked={ isFavorite }
-                      onClick={ setFavoriteTrack }
+                      onChange={ setFavoriteTrack }
                       data-testid={ `checkbox-music-${track.trackId}` }
                     />
                   </label>
@@ -81,6 +102,7 @@ class MusicCard extends Component {
 MusicCard.propTypes = {
   index: PropTypes.number.isRequired,
   track: PropTypes.string.isRequired,
+  favoriteTracks: PropTypes.string.isRequired,
 };
 
 export default MusicCard;
