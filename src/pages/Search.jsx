@@ -14,7 +14,6 @@ class Search extends Component {
       artistName: '',
       isButtonDisabled: true,
       isLoading: false,
-      foundArtist: false,
       foundAlbums: [],
       artistNameHolder: '',
     };
@@ -51,7 +50,6 @@ class Search extends Component {
         }, () => {
           this.setState({
             isLoading: false,
-            foundArtist: true,
           });
         });
       });
@@ -65,7 +63,6 @@ class Search extends Component {
     const { artistName,
       isButtonDisabled,
       isLoading,
-      foundArtist,
       foundAlbums,
       artistNameHolder,
     } = this.state;
@@ -96,12 +93,11 @@ class Search extends Component {
               </label>
             </form>
           )}
-        { foundArtist
-          && (
+        { foundAlbums.length !== 0
+          ? (
             <div>
               <p>
-                Resultado de Albuns de:
-                { artistNameHolder }
+                { `Resultado de álbuns de: ${artistNameHolder}` }
               </p>
               { foundAlbums.map((album) => (
                 <AlbumCard
@@ -113,7 +109,8 @@ class Search extends Component {
                 />
               ))}
             </div>
-          )}
+          )
+          : <p>Nenhum álbum foi encontrado</p>}
       </div>
     );
   }
